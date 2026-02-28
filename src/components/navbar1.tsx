@@ -128,8 +128,8 @@ const Navbar1 = ({
       ],
     },
     {
-      title: "Pricing",
-      url: "#",
+      title: "about",
+      url: "/about",
     },
     {
       title: "Blog",
