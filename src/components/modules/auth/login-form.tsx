@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -44,14 +45,17 @@ export default function LoginForm({
 
       try {
         const response = await loginUser(value);
-
-        if (response.success) {
+        console.log(response)
+        if (response?.success) {
+          toast.success("User login successfully", { id: toastId });
           router.push("/");
+        } else {
+          toast.error("Invalid email or password", { id: toastId });
         }
-        toast.success("User login successfully", { id: toastId });
-      } catch (err: any) {
-        console.log(err);
-        toast.error(err);
+      } catch (err: unknown) {
+        let message = "An unexpected error occurred";
+        if (err instanceof Error) message = err.message;
+        toast.error(message, { id: toastId });
       }
     },
   });
@@ -78,7 +82,6 @@ export default function LoginForm({
               {(field) => {
                 const isInvalid =
                   field.state.meta.isTouched && !field.state.meta.isValid;
-
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -102,7 +105,6 @@ export default function LoginForm({
               {(field) => {
                 const isInvalid =
                   field.state.meta.isTouched && !field.state.meta.isValid;
-
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -122,6 +124,11 @@ export default function LoginForm({
           </FieldGroup>
         </form>
       </CardContent>
+
+      {/* Right-aligned registration link */}
+      <CardDescription className="flex justify-end mr-6 text-sm">
+        New user? <a href="/signup" className="ml-1 text-blue-500 hover:underline">Create account</a>
+      </CardDescription>
 
       <CardFooter className="flex flex-col justify-end">
         <Button form="login-form" type="submit" className="border-2 p-2 w-full">
