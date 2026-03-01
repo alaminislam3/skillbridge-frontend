@@ -1,9 +1,6 @@
 "use client";
-
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
-
 import { cn } from "@/lib/utils";
-
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +23,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {useState, useEffect} from "react"
+import { getUser, UserLogOut } from "@/service/auth";
+
 
 interface MenuItem {
   title: string;
@@ -142,6 +142,21 @@ const Navbar1 = ({
   },
   className,
 }: Navbar1Props) => {
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(false)
+  useEffect(()=> {
+ const getCurrentUser = async () => {
+  const userData = await getUser()
+  setUser(userData)
+ }
+ getCurrentUser()
+   },[loading])
+
+   const handleLogout = () => {
+     UserLogOut()
+     setLoading(true)
+     console.log("user logout successfully")
+   }
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto">
@@ -168,9 +183,9 @@ const Navbar1 = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>
+           {user ?  <Button onClick={handleLogout} variant="outline" size="sm">Logout</Button> :  <Button asChild variant="outline" size="sm">
+              <a href={auth.login.url}>{auth.login.title} </a>
+            </Button>}
             <Button asChild size="sm">
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>

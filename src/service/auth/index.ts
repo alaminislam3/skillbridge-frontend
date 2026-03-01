@@ -1,6 +1,7 @@
 "use server"
 import {FieldValues} from "react-hook-form";
 import {cookies} from "next/headers"
+import {jwtDecode} from "jwt-decode"
 
 export const loginUser = async (userData : FieldValues) => {
     try {
@@ -40,3 +41,20 @@ export const registerUser = async (userData : FieldValues) =>  {
         console.log(error)
     }
 }
+
+export const getUser = async () =>{
+    const storeCookie = await cookies();
+    const token = storeCookie.get("token")?.value
+    let decodedData= null
+    if(token){
+        decodedData = await jwtDecode(token)
+        return decodedData
+    } else {
+        return null
+    }
+}
+
+export const UserLogOut = async () => {
+  const storeCookie = await cookies();
+  storeCookie.delete("token");
+};
