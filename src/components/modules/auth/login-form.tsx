@@ -45,7 +45,7 @@ export default function LoginForm({
 
       try {
         const response = await loginUser(value);
-        console.log(response)
+        // console.log(response)
         if (response?.success) {
           toast.success("User login successfully", { id: toastId });
           router.push("/");

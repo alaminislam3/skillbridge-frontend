@@ -1,4 +1,4 @@
-import Navbar1 from "@/components/modules/homepage/navbar1"
+import Navbar1 from "@/components/modules/homepage/navbar1";
 
 export default function DashboardLayout({
   children,
@@ -6,11 +6,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-       <div>
-
-         <Navbar1 />
-         <main>{children}</main>
-       </div>
-     
+    <div>
+      <Navbar1 />
+      <main>{children}</main>
+    </div>
   );
 }

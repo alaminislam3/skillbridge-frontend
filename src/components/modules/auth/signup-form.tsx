@@ -34,7 +34,7 @@ export  function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
    const toastId = toast.loading("loading..");
      try {
         const response = await registerUser(data);
-        console.log(response)
+        // console.log(response)
         if (response?.success) {
           toast.success("User register successfully | please login now", { id: toastId });
           router.push("/login");
@@ -107,7 +107,7 @@ export  function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               >
                 <option value="">Select a role</option>
                 <option value="STUDENT">Student</option>
-                <option value="ADMIN">Admin</option>
+               
                 <option value="TUTOR">Tutor</option>
               </select>
              

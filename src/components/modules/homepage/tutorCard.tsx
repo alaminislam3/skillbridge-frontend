@@ -27,8 +27,9 @@ export default function TutorCard({ tutor }: { tutor: Tutor }) {
       {/* Image */}
       <div className="relative h-56 w-full overflow-hidden">
         <Image
-          src="https://i.ibb.co.com/zHNB6LgT/orginal-cv-picture-2.jpg" 
-          alt="tutor picture "
+          /* ensure src is a string by falling back to a placeholder if image is undefined */
+          src={tutor.image ?? "/default-avatar.png"}
+          alt="tutor picture"
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
@@ -27,13 +28,14 @@ interface NavbarProps {
 const menu: MenuItem[] = [
   { title: "Home", url: "/" },
   { title: "Tutors", url: "/tutors" },
+  {title : "Profile", url : "/profile"},
   { title: "About", url: "/about" },
 ];
 
 export default function Navbar1({ className }: NavbarProps) {
   const pathname = usePathname();
   const [user, setUser] = useState<any>(null);
-
+//  console.log(user)
   useEffect(() => {
     const loadUser = async () => {
       const userData = await getUser();
@@ -117,7 +119,7 @@ export default function Navbar1({ className }: NavbarProps) {
                 size="sm"
                 className="bg-indigo-600 hover:bg-indigo-700"
               >
-                <Link href="/registration">Sign Up</Link>
+                <Link href="/signup">Sign Up</Link>
               </Button>
             </>
           )}
@@ -189,7 +191,7 @@ export default function Navbar1({ className }: NavbarProps) {
                         asChild
                         className="bg-indigo-600 hover:bg-indigo-700"
                       >
-                        <Link href="/registration">Sign Up</Link>
+                        <Link href="/signup">Sign Up</Link>
                       </Button>
                     </>
                   )}

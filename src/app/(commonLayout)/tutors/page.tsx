@@ -6,20 +6,20 @@ import TutorCard, { Tutor } from "@/components/modules/homepage/tutorCard";
 import { useEffect, useState } from "react";
 import { getAlltutor } from "@/service/tutor/tutor.service";
 
-export default function FeaturedTutor() {
+export default function Tutors() {
   const [tutors, setTutors] = useState<Tutor[]>([]);
 
   useEffect(() => {
     async function loadTutors() {
       const { data } = await getAlltutor({
-        cache: "no-store",
+        // cache: "no-store",
       });
       setTutors(data?.data || []);
     }
 
     loadTutors();
   }, []);
-
+  // console.log(tutors)
   // Duplicate array for smooth infinite effect
   const scrollingTutors = [...tutors, ...tutors];
 
@@ -30,7 +30,7 @@ export default function FeaturedTutor() {
         {/* Section Header */}
         <div className="mb-14 text-center">
           <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
-            🌟 Meet Our Featured Teacher
+             Meet Our All Available Teacher
           </h2>
           <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
             Handpicked educators trusted by hundreds of students.
