@@ -55,7 +55,7 @@ export const getSingleTutor= async (id: string, options?: ServiceOption) => {
       );
 
       const data = await result.json();
-//  console.log("Response status:", result.status);
+ 
 
       return { data: data, error: null };
     } catch (error) {

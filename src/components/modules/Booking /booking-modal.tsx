@@ -2,6 +2,7 @@
 
 import { createBooking } from "@/service/Booking/booking.service";
 import { useState } from "react";
+import { toast } from "sonner";
 
 
 type Props = {
@@ -12,16 +13,21 @@ export default function BookingModal({ tutorId }: Props) {
   const [open, setOpen] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
+  // console.log(startDate, "and", endDate)
   const handleSubmit = async () => {
-    const payload = {
-      tutorId,
-      startDate,
-      endDate,
-    };
-
+     const payload = {
+    tutorId,
+    startDate: new Date(startDate).toISOString(),
+    endDate: new Date(endDate).toISOString(),
+  };
+    
     const res = await createBooking(payload);
-
+    if(res.success){
+      toast.success(res.message)
+    }
+    else{
+      toast.error(res.messsage)
+    }
     console.log(res);
     setOpen(false);
   };

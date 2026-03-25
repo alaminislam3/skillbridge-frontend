@@ -27,7 +27,7 @@ export default async function SingleTutor({ params }: PageProps) {
           {/* Image Section */}
           <div className="relative w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden">
             <Image
-              src={data?.data.image || "https://i.ibb.co.com/Lz7fQq27/o.png"}
+              src={data?.image || "https://i.ibb.co.com/Lz7fQq27/o.png"}
               alt="data Image"
               fill
               className="object-cover"
@@ -83,9 +83,32 @@ export default async function SingleTutor({ params }: PageProps) {
               </div>
 
               
-              <BookingModel tutorId={`${data?.data.userId}`}/>
+              <BookingModel tutorId={`${data?.data.userId}`}/> 
 
             </div>
+
+              {data.data.reviews.map((review: any) => (
+  <div key={review.id} className="border rounded-lg p-4 bg-gray-50">
+    
+    <p className="font-semibold text-yellow-500">
+      ⭐ {review.rating} / 5
+    </p>
+
+    <p className="text-slate-700 mt-1">{review.comment}</p>
+
+    {/* ✅ Student name from studentRelation */}
+    <p className="text-sm text-gray-500 mt-2">
+      Name : <span className="font-medium text-slate-700">
+        {review.studentRelation?.name || "Anonymous"}
+      </span>
+    </p>
+
+    <p className="text-xs text-gray-400">
+      {new Date(review.createdAt).toLocaleDateString()}
+    </p>
+
+  </div>
+))}
 
           </div>
 

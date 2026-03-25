@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
@@ -29,7 +28,7 @@ const menu: MenuItem[] = [
   { title: "Home", url: "/" },
   { title: "Tutors", url: "/tutors" },
   {title : "Profile", url : "/profile"},
-  { title: "About", url: "/about" },
+  { title: "Dashboard", url: "/dashboard" },
 ];
 
 export default function Navbar1({ className }: NavbarProps) {
